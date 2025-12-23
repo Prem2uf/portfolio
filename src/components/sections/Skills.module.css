@@ -1,0 +1,140 @@
+.skills {
+  animation: slideIn 0.6s ease-out;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+  background: linear-gradient(to right, #818cf8, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.line {
+  width: 96px;
+  height: 4px;
+  background: linear-gradient(to right, #4f46e5, #7c3aed);
+  margin: 0 auto;
+  border-radius: 9999px;
+}
+
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.iconBox {
+  padding: 16px;
+  border-radius: 16px;
+  transition: transform 0.3s;
+}
+
+.card:hover .iconBox {
+  transform: scale(1.1);
+}
+
+.backend {
+  background: linear-gradient(to right, #3b82f6, #06b6d4);
+}
+
+.frontend {
+  background: linear-gradient(to right, #a855f7, #ec4899);
+}
+
+.database {
+  background: linear-gradient(to right, #eab308, #f97316);
+}
+
+.cloud {
+  background: linear-gradient(to right, #f97316, #ef4444);
+}
+
+.payments {
+  background: linear-gradient(to right, #10b981, #14b8a6);
+}
+
+.security {
+  background: linear-gradient(to right, #10b981, #059669);
+}
+
+.icon {
+  font-size: 2rem;
+  display: block;
+}
+
+.categoryTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-transform: capitalize;
+}
+
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skillTag {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+  color: #e5e7eb;
+}
+
+.skillTag:hover {
+  border-color: #818cf8;
+  background: rgba(129, 140, 248, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
