@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './About.module.css';
 
-function About() {
+const About = memo(function About() {
   return (
     <div className={styles.about}>
       <div className={styles.header}>
@@ -43,6 +43,6 @@ function About() {
       </div>
     </div>
   );
-}
+});
 
 export default About;

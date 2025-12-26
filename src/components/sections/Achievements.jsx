@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './Achievements.module.css';
 import { achievements } from '../../utils/data';
 
-function Achievements() {
+const Achievements = memo(function Achievements() {
   const getIcon = (iconName) => {
     const icons = {
       'TrendingUp': '📈',
@@ -34,6 +34,6 @@ function Achievements() {
       </div>
     </div>
   );
-}
+});
 
 export default Achievements;

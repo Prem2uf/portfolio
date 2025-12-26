@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styles from './Navbar.module.css';
 
-function Navbar({ activeSection, onNavClick }) {
+const Navbar = memo(function Navbar({ activeSection, onNavClick }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const sections = ['about', 'skills', 'projects', 'achievements', 'education'];
+  const sections = [
+    { id: 'about', label: 'About', icon: '👤' },
+    { id: 'skills', label: 'Skills', icon: '⚡' },
+    { id: 'projects', label: 'Projects', icon: '💼' },
+    { id: 'achievements', label: 'Achievements', icon: '🏆' },
+    { id: 'education', label: 'Education', icon: '🎓' }
+  ];
 
   const handleNavClick = (section) => {
     onNavClick(section);
@@ -21,48 +27,69 @@ function Navbar({ activeSection, onNavClick }) {
       <div className={styles.container}>
         <div className={styles.navContent}>
           <div className={styles.logo} onClick={handleLogoClick}>
-            <div className={styles.logoIcon}>
-              <span className={styles.logoInitials}>PY</span>
-              <div className={styles.logoGlow}></div>
+            <div className={styles.logoContainer}>
+              <div className={styles.logoIconWrapper}>
+                <div className={styles.logoIcon}>
+                  <div className={styles.logoBadge}>
+                    <span className={styles.logoInitials}>PY</span>
+                  </div>
+                  <div className={styles.logoAccent}></div>
+                </div>
+              </div>
+              <div className={styles.logoTextWrapper}>
+                <span className={styles.logoName}>Premchandra</span>
+                <span className={styles.logoSubtext}>FULL-STACK DEV</span>
+              </div>
             </div>
           </div>
           
           <div className={styles.desktopMenu}>
             {sections.map((section) => (
               <button
-                key={section}
-                onClick={() => handleNavClick(section)}
-                className={`${styles.navBtn} ${activeSection === section ? styles.active : ''}`}
+                key={section.id}
+                onClick={() => handleNavClick(section.id)}
+                className={`${styles.navBtn} ${activeSection === section.id ? styles.active : ''}`}
               >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
+                <span className={styles.navIcon}>{section.icon}</span>
+                <span className={styles.navText}>{section.label}</span>
+                {activeSection === section.id && (
+                  <span className={styles.activeIndicator}></span>
+                )}
               </button>
             ))}
           </div>
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={styles.mobileMenuBtn}
+            className={`${styles.mobileMenuBtn} ${mobileMenuOpen ? styles.active : ''}`}
+            aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? '✕' : '☰'}
+            <span className={styles.hamburger}>
+              <span className={styles.hamburgerLine}></span>
+              <span className={styles.hamburgerLine}></span>
+              <span className={styles.hamburgerLine}></span>
+            </span>
           </button>
         </div>
 
-        {mobileMenuOpen && (
-          <div className={styles.mobileMenu}>
-            {sections.map((section) => (
-              <button
-                key={section}
-                onClick={() => handleNavClick(section)}
-                className={`${styles.mobileNavBtn} ${activeSection === section ? styles.activeMobile : ''}`}
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </button>
-            ))}
-          </div>
-        )}
+        <div className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
+          {sections.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => handleNavClick(section.id)}
+              className={`${styles.mobileNavBtn} ${activeSection === section.id ? styles.activeMobile : ''}`}
+            >
+              <span className={styles.mobileNavIcon}>{section.icon}</span>
+              <span className={styles.mobileNavText}>{section.label}</span>
+              {activeSection === section.id && (
+                <span className={styles.mobileActiveIndicator}></span>
+              )}
+            </button>
+          ))}
+        </div>
       </div>
     </nav>
   );
-}
+});
 
 export default Navbar;

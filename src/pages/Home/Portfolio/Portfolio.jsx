@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './Portfolio.module.css';
 import Navbar from '../../../components/layout/Navbar';
 import Footer from '../../../components/layout/Footer';
@@ -8,6 +8,32 @@ import Skills from '../../../components/sections/Skills';
 import Projects from '../../../components/sections/Projects';
 import Achievements from '../../../components/sections/Achievements';
 import Education from '../../../components/sections/Education';
+
+// Throttle function for performance optimization
+function throttle(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// RequestAnimationFrame based throttle for scroll
+function rafThrottle(func) {
+  let rafId = null;
+  return function(...args) {
+    if (rafId === null) {
+      rafId = requestAnimationFrame(() => {
+        func(...args);
+        rafId = null;
+      });
+    }
+  };
+}
 
 function Portfolio() {
   const [activeSection, setActiveSection] = useState('about');
@@ -20,17 +46,19 @@ function Portfolio() {
     education: useRef(null)
   };
 
+  // Optimized mouse move handler with throttling
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = throttle((e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
+    }, 50); // Throttle to 50ms for smoother performance
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Scroll spy to update active section
+  // Optimized scroll spy with requestAnimationFrame throttling
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = rafThrottle(() => {
       const sections = ['about', 'skills', 'projects', 'achievements', 'education'];
       const scrollPosition = window.scrollY + 200; // Offset for navbar
 
@@ -41,19 +69,19 @@ function Portfolio() {
           const rect = element.getBoundingClientRect();
           const elementTop = rect.top + window.scrollY;
           if (scrollPosition >= elementTop - 100) {
-            setActiveSection(section);
+            setActiveSection(prev => prev !== section ? section : prev);
             break;
           }
         }
       }
-    };
+    });
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (section) => {
+  const handleNavClick = useCallback((section) => {
     setActiveSection(section);
     const element = sectionRefs[section]?.current;
     if (element) {
@@ -63,7 +91,7 @@ function Portfolio() {
         behavior: 'smooth'
       });
     }
-  };
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -81,9 +109,11 @@ function Portfolio() {
         <div className={styles.orb2}></div>
       </div>
 
+      {/* Navbar - Outside content div to ensure fixed positioning works */}
+      <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
+      
       {/* Content */}
       <div className={styles.content}>
-        <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
         <Hero />
         
         <section className={styles.mainContent}>

@@ -61,12 +61,19 @@
 .content {
   position: relative;
   z-index: 10;
+  /* GPU acceleration for smoother scrolling */
+  transform: translateZ(0);
+  will-change: scroll-position;
 }
 
 .mainContent {
   padding: 60px 16px;
   max-width: 1280px;
   margin: 0 auto;
+  /* Optimize text rendering during scroll */
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @media (min-width: 640px) {
@@ -84,6 +91,13 @@
 .section {
   scroll-margin-top: 80px;
   margin-bottom: 80px;
+  /* GPU acceleration for sections */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* Optimize text rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @media (min-width: 640px) {

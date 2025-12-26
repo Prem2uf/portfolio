@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './Skills.module.css';
 import { skills } from '../../utils/data';
 
-function Skills() {
+const Skills = memo(function Skills() {
   const getIcon = (iconName) => {
     const icons = {
       'Database': '🗄️',
@@ -42,6 +42,6 @@ function Skills() {
       </div>
     </div>
   );
-}
+});
 
 export default Skills;

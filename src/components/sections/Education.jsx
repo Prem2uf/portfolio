@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './Education.module.css';
 import { education } from '../../utils/data';
 
-function Education() {
+const Education = memo(function Education() {
   return (
     <div className={styles.education}>
       <div className={styles.header}>
@@ -29,6 +29,6 @@ function Education() {
       </div>
     </div>
   );
-}
+});
 
 export default Education;

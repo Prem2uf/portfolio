@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styles from './Hero.module.css';
 import { profileData } from '../../utils/data';
 // Import your profile image
 import profileImage from '../../assets/images/profile.png';
 
-function Hero() {
+const Hero = memo(function Hero() {
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
@@ -111,6 +111,6 @@ function Hero() {
       </div>
     </section>
   );
-}
+});
 
 export default Hero;

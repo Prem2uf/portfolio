@@ -13,6 +13,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Performance optimizations for mobile scrolling */
+/* Only apply GPU acceleration to elements that need it */
+h1, h2, h3, h4, h5, h6, p, span, div {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Optimize text rendering during scroll */
+body {
+  /* Improve text rendering performance */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Enable hardware acceleration */
+  transform: translateZ(0);
+  will-change: scroll-position;
+  /* Smooth scrolling on mobile */
+  -webkit-overflow-scrolling: touch;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -24,6 +44,10 @@ a:hover {
 
 html {
   scroll-behavior: smooth;
+  /* Optimize scrolling performance */
+  -webkit-overflow-scrolling: touch;
+  /* Enable GPU acceleration */
+  transform: translateZ(0);
 }
 
 body {
@@ -31,11 +55,22 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
+  /* Prevent text selection lag on mobile */
+  -webkit-tap-highlight-color: transparent;
+  /* Optimize rendering */
+  contain: layout style paint;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  /* Optimize text rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* GPU acceleration for headings */
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 button {

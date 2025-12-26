@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './Projects.module.css';
 import { projects } from '../../utils/data';
 
-function Projects() {
+const Projects = memo(function Projects() {
   return (
     <div className={styles.projects}>
       <div className={styles.header}>
@@ -45,6 +45,6 @@ function Projects() {
       </div>
     </div>
   );
-}
+});
 
 export default Projects;
