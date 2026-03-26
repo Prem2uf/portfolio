@@ -3,18 +3,22 @@ export const profileData = {
   title: "Full-Stack Developer",
   email: "premkumarraj18951@gmail.com",
   phone: "+917033180338",
-  location: "East Champaran, Bihar",
+  location: "Noida, Uttar Pradesh",
+  hometown: "East Champaran, Bihar",
   linkedin: "https://www.linkedin.com/in/premchandra-yadav-20135b241/",
   github: "https://github.com/Prem2uf",
   hackerrank: "#",
   leetcode: "#",
   gfg: "#",
-  resume: "/resume.pdf" // Place your resume PDF file in the public folder as "resume.pdf"
+  resume: "/resume.pdf", // Place your resume PDF file in the public folder as "resume.pdf"
+  organization: "Epic Web Techno",
+  organizationRole: "Full-Stack Developer",
+  organizationSince: "July 2023"
 };
 
 export const skills = {
   backend: {
-    items: ['PHP', 'Laravel 9/10+', 'REST APIs', 'Multi-Tenancy', 'Queues & Jobs'],
+    items: ['PHP', 'Laravel 9/10+', 'REST APIs', 'Multi-Tenancy', 'Queues & Jobs', 'Laravel Nova'],
     icon: 'Database',
     color: 'from-blue-500 to-cyan-500'
   },
@@ -24,14 +28,19 @@ export const skills = {
     color: 'from-purple-500 to-pink-500'
   },
   database: {
-    items: ['MySQL', 'Query Optimization', 'Indexing', 'Migrations'],
+    items: ['MySQL', 'Redis', 'Query Optimization', 'Indexing', 'Migrations'],
     icon: 'Database',
     color: 'from-yellow-500 to-orange-500'
   },
   cloud: {
-    items: ['AWS CloudWatch', 'API Gateway', 'Elastic Beanstalk'],
+    items: ['AWS CloudWatch', 'API Gateway', 'Elastic Beanstalk', 'AWS Scheduler', 'ElastiCache(Redis)'],
     icon: 'Cloud',
     color: 'from-orange-500 to-red-500'
+  },
+  integrations: {
+    items: ['Brevo', 'Klaviyo', 'Nova Dashboard'],
+    icon: 'Mail',
+    color: 'from-indigo-500 to-violet-500'
   },
   payments: {
     items: ['Stripe', 'PayPal SDK', 'Zoho Billing'],
@@ -95,6 +104,24 @@ export const projects = [
   }
 ];
 
+export const experience = [
+  {
+    company: 'Epic Web Techno',
+    role: 'Full-Stack Developer',
+    duration: 'July 2023 - Present',
+    type: 'Full-Time',
+    description: 'Working as a core developer building enterprise-grade SaaS products, multi-tenant platforms, and scalable backend systems.',
+    highlights: [
+      'Led backend development of Buyience, an AI-driven multi-tenant B2B platform with 600+ REST APIs',
+      'Architected multi-tenant systems with isolated databases and advanced RBAC',
+      'Integrated Stripe, PayPal, and Zoho Billing for payment processing',
+      'Implemented AWS CloudWatch & API Gateway for usage analytics and monitoring',
+      'Improved bulk product import performance by 60% through query optimization',
+      'Built JWT authentication with 2FA for enhanced security'
+    ]
+  }
+];
+
 export const achievements = [
   {
     text: 'Improved bulk product import performance by 60%',
@@ -117,7 +144,7 @@ export const achievements = [
 export const education = [
   {
     degree: 'B.Tech in Computer Science',
-    school: 'Maharishi Markandeshwar University',
+    school: 'Maharishi Markandeshwar (Deemed To Be University)',
     years: '2019 - 2023',
     grade: '82%'
   },

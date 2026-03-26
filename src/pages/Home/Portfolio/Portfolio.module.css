@@ -1,116 +1,122 @@
 .container {
   min-height: 100vh;
-  background: black;
-  color: white;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   overflow-x: hidden;
   position: relative;
 }
 
+/* ===== ANIMATED BACKGROUND ===== */
 .background {
   position: fixed;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
 }
 
 .gradientBase {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, #312e81, #581c87, black);
-  opacity: 0.7;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(108, 99, 255, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(167, 139, 250, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(244, 114, 182, 0.06) 0%, transparent 50%),
+    var(--bg-primary);
+}
+
+.meshGrid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(108, 99, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108, 99, 255, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
 }
 
 .mouseOrb {
   position: absolute;
-  width: 384px;
-  height: 384px;
-  background: #6366f1;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.12) 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.2;
   transform: translate(-50%, -50%);
-  transition: transform 1s ease-out;
+  transition: left 1.5s ease-out, top 1.5s ease-out;
+  pointer-events: none;
 }
 
 .orb1 {
   position: absolute;
-  top: 25%;
-  right: 25%;
-  width: 384px;
-  height: 384px;
-  background: #a855f7;
+  top: 20%;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.08) 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.1;
-  animation: pulse 3s ease-in-out infinite;
+  animation: orbFloat1 20s ease-in-out infinite;
 }
 
 .orb2 {
   position: absolute;
-  bottom: 25%;
-  left: 25%;
-  width: 384px;
-  height: 384px;
-  background: #ec4899;
+  bottom: 20%;
+  left: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.06) 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.1;
-  animation: pulse 3s ease-in-out infinite;
-  animation-delay: 1s;
+  animation: orbFloat2 25s ease-in-out infinite;
 }
 
+.noiseOverlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ===== CONTENT LAYER ===== */
 .content {
   position: relative;
   z-index: 10;
-  /* GPU acceleration for smoother scrolling */
   transform: translateZ(0);
-  will-change: scroll-position;
 }
 
 .mainContent {
-  padding: 60px 16px;
-  max-width: 1280px;
+  padding: 40px var(--container-padding);
+  max-width: var(--container-max);
   margin: 0 auto;
-  /* Optimize text rendering during scroll */
-  text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 @media (min-width: 640px) {
   .mainContent {
-    padding: 80px 24px;
+    padding: 60px var(--container-padding);
   }
 }
 
 @media (min-width: 1024px) {
   .mainContent {
-    padding: 100px 32px;
+    padding: 80px var(--container-padding);
   }
 }
 
 .section {
-  scroll-margin-top: 80px;
-  margin-bottom: 80px;
-  /* GPU acceleration for sections */
+  scroll-margin-top: 100px;
+  margin-bottom: 100px;
   transform: translateZ(0);
   backface-visibility: hidden;
-  /* Optimize text rendering */
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 @media (min-width: 640px) {
   .section {
-    scroll-margin-top: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 120px;
   }
 }
 
 @media (min-width: 1024px) {
   .section {
-    scroll-margin-top: 100px;
-    margin-bottom: 120px;
+    margin-bottom: var(--section-gap);
   }
 }
 
@@ -118,18 +124,68 @@
   margin-bottom: 0;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.1; transform: scale(1); }
-  50% { opacity: 0.15; transform: scale(1.1); }
+/* ===== ORB ANIMATIONS ===== */
+@keyframes orbFloat1 {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1);
+    opacity: 0.08;
+  }
+  33% { 
+    transform: translate(-40px, 60px) scale(1.1);
+    opacity: 0.05;
+  }
+  66% { 
+    transform: translate(30px, -40px) scale(0.9);
+    opacity: 0.1;
+  }
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+@keyframes orbFloat2 {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1);
+    opacity: 0.06;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  33% { 
+    transform: translate(50px, -30px) scale(1.15);
+    opacity: 0.04;
   }
+  66% { 
+    transform: translate(-30px, 50px) scale(0.95);
+    opacity: 0.08;
+  }
+}
+
+/* ===== LIGHT MODE BACKGROUND ===== */
+.container {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] .gradientBase {
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(91, 82, 224, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(124, 92, 231, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(232, 67, 147, 0.03) 0%, transparent 50%),
+    var(--bg-primary);
+}
+
+[data-theme="light"] .meshGrid {
+  background-image: 
+    linear-gradient(rgba(91, 82, 224, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 82, 224, 0.04) 1px, transparent 1px);
+}
+
+[data-theme="light"] .mouseOrb {
+  background: radial-gradient(circle, rgba(91, 82, 224, 0.06) 0%, transparent 70%);
+}
+
+[data-theme="light"] .orb1 {
+  background: radial-gradient(circle, rgba(124, 92, 231, 0.05) 0%, transparent 70%);
+}
+
+[data-theme="light"] .orb2 {
+  background: radial-gradient(circle, rgba(232, 67, 147, 0.04) 0%, transparent 70%);
+}
+
+[data-theme="light"] .noiseOverlay {
+  opacity: 0.025;
 }

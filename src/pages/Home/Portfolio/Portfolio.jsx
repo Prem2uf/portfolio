@@ -4,12 +4,13 @@ import Navbar from '../../../components/layout/Navbar';
 import Footer from '../../../components/layout/Footer';
 import Hero from '../../../components/sections/Hero';
 import About from '../../../components/sections/About';
+import Experience from '../../../components/sections/Experience';
 import Skills from '../../../components/sections/Skills';
 import Projects from '../../../components/sections/Projects';
 import Achievements from '../../../components/sections/Achievements';
 import Education from '../../../components/sections/Education';
+import Contact from '../../../components/sections/Contact';
 
-// Throttle function for performance optimization
 function throttle(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -22,7 +23,6 @@ function throttle(func, wait) {
   };
 }
 
-// RequestAnimationFrame based throttle for scroll
 function rafThrottle(func) {
   let rafId = null;
   return function(...args) {
@@ -40,27 +40,27 @@ function Portfolio() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRefs = {
     about: useRef(null),
+    experience: useRef(null),
     skills: useRef(null),
     projects: useRef(null),
     achievements: useRef(null),
-    education: useRef(null)
+    education: useRef(null),
+    contact: useRef(null)
   };
 
-  // Optimized mouse move handler with throttling
   useEffect(() => {
     const handleMouseMove = throttle((e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-    }, 50); // Throttle to 50ms for smoother performance
+    }, 50);
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Optimized scroll spy with requestAnimationFrame throttling
   useEffect(() => {
     const handleScroll = rafThrottle(() => {
-      const sections = ['about', 'skills', 'projects', 'achievements', 'education'];
-      const scrollPosition = window.scrollY + 200; // Offset for navbar
+      const sections = ['about', 'experience', 'skills', 'projects', 'achievements', 'education', 'contact'];
+      const scrollPosition = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
@@ -77,7 +77,7 @@ function Portfolio() {
     });
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -85,7 +85,7 @@ function Portfolio() {
     setActiveSection(section);
     const element = sectionRefs[section]?.current;
     if (element) {
-      const offsetTop = element.offsetTop - 80; // Account for fixed navbar
+      const offsetTop = element.offsetTop - 80;
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth'
@@ -98,27 +98,31 @@ function Portfolio() {
       {/* Animated Background */}
       <div className={styles.background}>
         <div className={styles.gradientBase}></div>
+        <div className={styles.meshGrid}></div>
         <div 
           className={styles.mouseOrb}
           style={{ 
-            left: `${mousePosition.x / 20}px`, 
-            top: `${mousePosition.y / 20}px`
+            left: `${mousePosition.x / 15}px`, 
+            top: `${mousePosition.y / 15}px`
           }}
         ></div>
         <div className={styles.orb1}></div>
         <div className={styles.orb2}></div>
+        <div className={styles.noiseOverlay}></div>
       </div>
 
-      {/* Navbar - Outside content div to ensure fixed positioning works */}
       <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
       
-      {/* Content */}
       <div className={styles.content}>
         <Hero />
         
         <section className={styles.mainContent}>
           <div id="about" ref={sectionRefs.about} className={styles.section}>
             <About />
+          </div>
+
+          <div id="experience" ref={sectionRefs.experience} className={styles.section}>
+            <Experience />
           </div>
           
           <div id="skills" ref={sectionRefs.skills} className={styles.section}>
@@ -135,6 +139,10 @@ function Portfolio() {
           
           <div id="education" ref={sectionRefs.education} className={styles.section}>
             <Education />
+          </div>
+
+          <div id="contact" ref={sectionRefs.contact} className={styles.section}>
+            <Contact />
           </div>
         </section>
 
