@@ -94,9 +94,9 @@ function Portfolio() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} itemScope itemType="https://schema.org/ProfilePage">
       {/* Animated Background */}
-      <div className={styles.background}>
+      <div className={styles.background} aria-hidden="true">
         <div className={styles.gradientBase}></div>
         <div className={styles.meshGrid}></div>
         <div 
@@ -113,41 +113,43 @@ function Portfolio() {
 
       <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
       
-      <div className={styles.content}>
-        <Hero />
+      <main className={styles.content} role="main">
+        <header>
+          <Hero />
+        </header>
         
-        <section className={styles.mainContent}>
-          <div id="about" ref={sectionRefs.about} className={styles.section}>
+        <div className={styles.mainContent}>
+          <section id="about" ref={sectionRefs.about} className={styles.section} aria-label="About Premchandra Yadav">
             <About />
-          </div>
+          </section>
 
-          <div id="experience" ref={sectionRefs.experience} className={styles.section}>
+          <section id="experience" ref={sectionRefs.experience} className={styles.section} aria-label="Work Experience">
             <Experience />
-          </div>
+          </section>
           
-          <div id="skills" ref={sectionRefs.skills} className={styles.section}>
+          <section id="skills" ref={sectionRefs.skills} className={styles.section} aria-label="Technical Skills">
             <Skills />
-          </div>
+          </section>
           
-          <div id="projects" ref={sectionRefs.projects} className={styles.section}>
+          <section id="projects" ref={sectionRefs.projects} className={styles.section} aria-label="Projects Portfolio">
             <Projects />
-          </div>
+          </section>
           
-          <div id="achievements" ref={sectionRefs.achievements} className={styles.section}>
+          <section id="achievements" ref={sectionRefs.achievements} className={styles.section} aria-label="Professional Achievements">
             <Achievements />
-          </div>
+          </section>
           
-          <div id="education" ref={sectionRefs.education} className={styles.section}>
+          <section id="education" ref={sectionRefs.education} className={styles.section} aria-label="Education Background">
             <Education />
-          </div>
+          </section>
 
-          <div id="contact" ref={sectionRefs.contact} className={styles.section}>
+          <section id="contact" ref={sectionRefs.contact} className={styles.section} aria-label="Contact Information">
             <Contact />
-          </div>
-        </section>
+          </section>
+        </div>
 
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }

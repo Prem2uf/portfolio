@@ -1,0 +1,11 @@
+# Robots.txt for premchandrayadav.in
+# Allow all search engines to crawl all content
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.premchandrayadav.in/sitemap.xml
+
+# Disallow unnecessary paths
+Disallow: /assets/

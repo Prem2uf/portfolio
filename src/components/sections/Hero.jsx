@@ -7,7 +7,7 @@ const Hero = memo(function Hero() {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} itemScope itemType="https://schema.org/Person">
       <div className={styles.container}>
         <div className={styles.content}>
           {/* Profile Image */}
@@ -18,8 +18,10 @@ const Hero = memo(function Hero() {
                 {!imageError ? (
                   <img 
                     src={profileImage} 
-                    alt="Premchandra Yadav" 
+                    alt="Premchandra Yadav - Full Stack Developer from Noida, India" 
                     className={styles.profileImg}
+                    itemProp="image"
+                    loading="eager"
                     onError={() => setImageError(true)}
                   />
                 ) : (
@@ -40,22 +42,23 @@ const Hero = memo(function Hero() {
               <span className={styles.greetingText}>Hello, I'm</span>
             </div>
             
-            <h1 className={styles.title}>
+            <h1 className={styles.title} itemProp="name">
               Premchandra
               <span className={styles.titleAccent}> Yadav</span>
             </h1>
             
             <div className={styles.roleWrapper}>
               <span className={styles.roleLine}></span>
-              <h2 className={styles.subtitle}>Full-Stack Developer</h2>
+              <h2 className={styles.subtitle} itemProp="jobTitle">Full-Stack Developer</h2>
               <span className={styles.roleLine}></span>
             </div>
             
-            <p className={styles.description}>
+            <p className={styles.description} itemProp="description">
               I build powerful <span className={styles.highlight}>SaaS platforms</span> and 
               <span className={styles.highlight}> scalable applications</span> with 
-              Laravel & React. Specialized in multi-tenant architectures 
-              and enterprise solutions.
+              Laravel & React. Specialized in multi-tenant architectures, 
+              REST APIs, AWS cloud infrastructure, and enterprise solutions 
+              for businesses worldwide.
             </p>
 
             <div className={styles.orgBadge}>
