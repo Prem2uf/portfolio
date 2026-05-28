@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import styles from './Footer.module.css';
+import profileImage from '../../assets/images/profile.png';
 
 const Footer = memo(function Footer() {
   const currentYear = new Date().getFullYear();
@@ -9,7 +10,13 @@ const Footer = memo(function Footer() {
       <div className={styles.container}>
         <div className={styles.top}>
           <div className={styles.brand}>
-            <div className={styles.logoBadge}>PY</div>
+            <div className={styles.logoBadge}>
+              <img 
+                src={profileImage} 
+                alt="Premchandra Yadav" 
+                className={styles.logoImg}
+              />
+            </div>
             <div>
               <p className={styles.brandName}>Premchandra Yadav</p>
               <p className={styles.brandRole}>Full-Stack Developer</p>

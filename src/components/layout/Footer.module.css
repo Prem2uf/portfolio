@@ -36,7 +36,7 @@
 .logoBadge {
   width: 36px;
   height: 36px;
-  border-radius: var(--radius-sm);
+  border-radius: 50%;
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   display: flex;
   align-items: center;
@@ -45,6 +45,19 @@
   font-size: 0.85rem;
   font-weight: 800;
   color: white;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.3);
+}
+
+.logoImg {
+  width: 140%;
+  height: 140%;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 50%;
+  display: block;
+  transform: scaleX(-1);
 }
 
 .brandName {
