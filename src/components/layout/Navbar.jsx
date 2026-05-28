@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import styles from './Navbar.module.css';
 import { useTheme } from '../../utils/ThemeContext';
+import logoAvatar from '../../assets/images/logo-avatar.png';
 
 const Navbar = memo(function Navbar({ activeSection, onNavClick }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -42,7 +43,11 @@ const Navbar = memo(function Navbar({ activeSection, onNavClick }) {
           {/* Logo */}
           <div className={styles.logo} onClick={handleLogoClick}>
             <div className={styles.logoBadge}>
-              <span className={styles.logoInitials}>PY</span>
+              <img
+                src={logoAvatar}
+                alt="Premchandra Yadav Logo"
+                className={styles.logoImg}
+              />
             </div>
             <div className={styles.logoText}>
               <span className={styles.logoName}>Premchandra</span>

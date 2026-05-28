@@ -42,7 +42,7 @@
   /* Spacing */
   --section-gap: 120px;
   --container-max: 1200px;
-  --container-padding: 24px;
+  --container-padding: 16px;
 
   /* Transitions */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);

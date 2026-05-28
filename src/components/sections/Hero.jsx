@@ -271,6 +271,24 @@ const Hero = memo(function Hero() {
                 <span>Available</span>
               </div>
             </div>
+
+            {/* Mobile-only stat row (replaces floating cards on small screens) */}
+            <div className={styles.mobileStats}>
+              <div className={styles.mobileStat}>
+                <span className={styles.mobileStatNum}>~3</span>
+                <span className={styles.mobileStatLabel}>Years Exp.</span>
+              </div>
+              <div className={styles.mobileStatDivider}></div>
+              <div className={styles.mobileStat}>
+                <span className={styles.mobileStatNum}>1500+</span>
+                <span className={styles.mobileStatLabel}>APIs Built</span>
+              </div>
+              <div className={styles.mobileStatDivider}></div>
+              <div className={styles.mobileStat}>
+                <span className={styles.mobileStatNum}>5+</span>
+                <span className={styles.mobileStatLabel}>Projects</span>
+              </div>
+            </div>
           </div>
         </div>
 
