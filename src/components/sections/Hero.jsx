@@ -214,30 +214,25 @@ const Hero = memo(function Hero() {
           <div className={styles.rightCol}>
             {/* Profile Image Card */}
             <div className={styles.profileCard}>
-              {/* Floating decorative rings */}
-              <div className={styles.ring1}></div>
-              <div className={styles.ring2}></div>
-              <div className={styles.ring3}></div>
-
-              {/* Image Frame */}
+              {/* Decorative accent lines */}
+              <div className={styles.accentLine1}></div>
+              <div className={styles.accentLine2}></div>
+              
+              {/* Free-standing Cutout Image */}
               <div className={styles.imageFrame}>
-                <div className={styles.imageGlow}></div>
-                <div className={styles.imageBorder}>
-                  <div className={styles.imageInner}>
-                    {!imageError ? (
-                      <img
-                        src={profileImage}
-                        alt="Premchandra Yadav - Full Stack Developer"
-                        className={styles.profileImg}
-                        itemProp="image"
-                        loading="eager"
-                        onError={() => setImageError(true)}
-                      />
-                    ) : (
-                      <span className={styles.initials}>PY</span>
-                    )}
-                  </div>
-                </div>
+                <div className={styles.imageBackdrop}></div>
+                {!imageError ? (
+                  <img
+                    src={profileImage}
+                    alt="Premchandra Yadav - Full Stack Developer"
+                    className={styles.profileImg}
+                    itemProp="image"
+                    loading="eager"
+                    onError={() => setImageError(true)}
+                  />
+                ) : (
+                  <span className={styles.initials}>PY</span>
+                )}
               </div>
 
               {/* Floating stat cards */}
@@ -249,19 +244,11 @@ const Hero = memo(function Hero() {
                 </div>
               </div>
 
-              <div className={`${styles.floatCard} ${styles.floatCardRight}`} id="hero-stat-apis">
+              <div className={`${styles.floatCard} ${styles.floatCardBottom}`} id="hero-stat-apis">
                 <div className={styles.floatIcon}>🚀</div>
                 <div className={styles.floatInfo}>
                   <span className={styles.floatNum}>1500+</span>
                   <span className={styles.floatLabel}>APIs Built</span>
-                </div>
-              </div>
-
-              <div className={`${styles.floatCard} ${styles.floatCardBottom}`} id="hero-stat-projects">
-                <div className={styles.floatIcon}>🏆</div>
-                <div className={styles.floatInfo}>
-                  <span className={styles.floatNum}>5+</span>
-                  <span className={styles.floatLabel}>Projects</span>
                 </div>
               </div>
 
@@ -282,11 +269,6 @@ const Hero = memo(function Hero() {
               <div className={styles.mobileStat}>
                 <span className={styles.mobileStatNum}>1500+</span>
                 <span className={styles.mobileStatLabel}>APIs Built</span>
-              </div>
-              <div className={styles.mobileStatDivider}></div>
-              <div className={styles.mobileStat}>
-                <span className={styles.mobileStatNum}>5+</span>
-                <span className={styles.mobileStatLabel}>Projects</span>
               </div>
             </div>
           </div>

@@ -494,127 +494,354 @@
 /* ===== PROFILE CARD ===== */
 .profileCard {
   position: relative;
-  width: 260px;
-  height: 260px;
+  width: 300px;
+  height: 340px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-@media (min-width: 480px) {
-  .profileCard { width: 300px; height: 300px; }
-}
-
-@media (min-width: 900px) {
-  .profileCard { width: 360px; height: 440px; }
-}
-
-/* Decorative rings — hidden on small mobile, shown on larger */
-.ring1, .ring2, .ring3 {
+/* Add decorative border elements with rounded corners */
+.profileCard::before {
+  content: '';
   position: absolute;
-  border-radius: 50%;
-  border: 1px solid;
-  pointer-events: none;
+  inset: -20px;
+  background: linear-gradient(135deg, 
+    rgba(108, 99, 255, 0.2) 0%, 
+    rgba(167, 139, 250, 0.15) 50%, 
+    rgba(244, 114, 182, 0.1) 100%);
+  border-radius: 32px;
+  z-index: 0;
+  opacity: 0.6;
+  filter: blur(40px);
+  animation: borderPulse 4s ease-in-out infinite;
 }
 
-.ring1 {
-  width: 250px;
-  height: 250px;
-  border-color: rgba(108, 99, 255, 0.15);
-  animation: ringRotate 20s linear infinite;
+/* Light mode backdrop */
+[data-theme="light"] .profileCard::before {
+  background: linear-gradient(135deg, 
+    rgba(91, 82, 224, 0.15) 0%, 
+    rgba(124, 92, 231, 0.12) 50%, 
+    rgba(232, 67, 147, 0.08) 100%);
+  opacity: 0.5;
+  filter: blur(50px);
 }
 
-.ring2 {
-  width: 300px;
-  height: 300px;
-  border-color: rgba(167, 139, 250, 0.09);
-  animation: ringRotate 30s linear infinite reverse;
+/* Decorative corner accents */
+.accentLine1 {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 60px;
+  height: 60px;
+  border-top: 3px solid rgba(108, 99, 255, 0.5);
+  border-right: 3px solid rgba(108, 99, 255, 0.5);
+  border-radius: 0 20px 0 0;
+  z-index: 4;
+  animation: cornerGlow 3s ease-in-out infinite;
 }
 
-.ring3 {
-  display: none;
+/* Light mode corner */
+[data-theme="light"] .accentLine1 {
+  border-top-color: rgba(91, 82, 224, 0.4);
+  border-right-color: rgba(91, 82, 224, 0.4);
 }
 
-@media (min-width: 480px) {
-  .ring1 { width: 290px; height: 290px; }
-  .ring2 { width: 345px; height: 345px; }
+.accentLine2 {
+  position: absolute;
+  bottom: -10px;
+  left: -10px;
+  width: 60px;
+  height: 60px;
+  border-bottom: 3px solid rgba(167, 139, 250, 0.5);
+  border-left: 3px solid rgba(167, 139, 250, 0.5);
+  border-radius: 0 0 0 20px;
+  z-index: 4;
+  animation: cornerGlow 3s ease-in-out infinite 1.5s;
 }
 
-@media (min-width: 900px) {
-  .ring1 { width: 310px; height: 310px; }
-  .ring2 { width: 370px; height: 370px; }
-  .ring3 {
-    display: block;
-    width: 430px;
-    height: 430px;
-    border-color: rgba(244, 114, 182, 0.06);
-    animation: ringRotate 40s linear infinite;
+/* Light mode corner */
+[data-theme="light"] .accentLine2 {
+  border-bottom-color: rgba(124, 92, 231, 0.4);
+  border-left-color: rgba(124, 92, 231, 0.4);
+}
+
+@keyframes cornerGlow {
+  0%, 100% { 
+    opacity: 0.5;
+    filter: drop-shadow(0 0 5px rgba(108, 99, 255, 0.3));
+  }
+  50% { 
+    opacity: 1;
+    filter: drop-shadow(0 0 15px rgba(108, 99, 255, 0.6));
   }
 }
 
-@keyframes ringRotate {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* Image Frame */
-.imageFrame {
-  position: relative;
-  z-index: 2;
-}
-
-.imageGlow {
-  position: absolute;
-  inset: -12px;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-warm));
-  border-radius: 50%;
-  filter: blur(28px);
-  opacity: 0.3;
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-.imageBorder {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  padding: 3px;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-warm));
-  animation: gradient-shift 8s ease infinite;
-  background-size: 300% 300%;
+@keyframes borderPulse {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.01);
+  }
 }
 
 @media (min-width: 480px) {
-  .imageBorder { width: 230px; height: 230px; }
+  .profileCard { 
+    width: 360px; 
+    height: 400px; 
+  }
+  
+  .accentLine1,
+  .accentLine2 {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 @media (min-width: 900px) {
-  .imageBorder { width: 260px; height: 260px; }
+  .profileCard { 
+    width: 500px; 
+    height: 560px; 
+  }
+  
+  .profileCard::before {
+    inset: -30px;
+    filter: blur(50px);
+    border-radius: 40px;
+  }
+  
+  [data-theme="light"] .profileCard::before {
+    filter: blur(60px);
+  }
+  
+  .accentLine1 {
+    top: -15px;
+    right: -15px;
+    width: 90px;
+    height: 90px;
+    border-width: 4px;
+    border-radius: 0 24px 0 0;
+  }
+  
+  .accentLine2 {
+    bottom: -15px;
+    left: -15px;
+    width: 90px;
+    height: 90px;
+    border-width: 4px;
+    border-radius: 0 0 0 24px;
+  }
 }
 
-.imageInner {
+/* Free-standing Cutout Layout */
+.imageFrame {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  background: var(--bg-secondary);
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border-radius: 20px;
+  /* Add stylish border - theme aware */
+  border: 3px solid rgba(108, 99, 255, 0.3);
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.05), rgba(167, 139, 250, 0.05));
+  box-shadow: 
+    0 0 0 1px rgba(108, 99, 255, 0.1),
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+/* Light mode adjustments */
+[data-theme="light"] .imageFrame {
+  border-color: rgba(91, 82, 224, 0.25);
+  background: linear-gradient(135deg, rgba(91, 82, 224, 0.04), rgba(124, 92, 231, 0.04));
+  box-shadow: 
+    0 0 0 1px rgba(91, 82, 224, 0.08),
+    0 20px 60px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Gradient overlay to darken and blend desk - stronger in light mode */
+.imageFrame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 15, 35, 0) 0%,
+    rgba(15, 15, 35, 0) 30%,
+    rgba(15, 15, 35, 0.6) 70%,
+    rgba(15, 15, 35, 0.85) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Light mode - different overlay */
+[data-theme="light"] .imageFrame::before {
+  background: linear-gradient(
+    180deg,
+    rgba(248, 249, 252, 0) 0%,
+    rgba(248, 249, 252, 0) 25%,
+    rgba(100, 90, 200, 0.15) 60%,
+    rgba(80, 70, 180, 0.35) 100%
+  );
+  mix-blend-mode: normal;
+  opacity: 0.7;
+}
+
+/* Add subtle vignette effect */
+.imageFrame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.8;
+}
+
+/* Light mode vignette */
+[data-theme="light"] .imageFrame::after {
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  opacity: 0.6;
+}
+
+/* Enhanced backdrop with multiple layers */
+.imageBackdrop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 280px;
+  background: 
+    radial-gradient(circle at 50% 40%, rgba(108, 99, 255, 0.5) 0%, transparent 70%),
+    radial-gradient(circle at 30% 30%, rgba(167, 139, 250, 0.35) 0%, transparent 60%),
+    radial-gradient(circle at 70% 50%, rgba(244, 114, 182, 0.25) 0%, transparent 60%);
+  filter: blur(70px);
+  z-index: 0;
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/* Light mode backdrop */
+[data-theme="light"] .imageBackdrop {
+  background: 
+    radial-gradient(circle at 50% 40%, rgba(91, 82, 224, 0.3) 0%, transparent 70%),
+    radial-gradient(circle at 30% 30%, rgba(124, 92, 231, 0.2) 0%, transparent 60%),
+    radial-gradient(circle at 70% 50%, rgba(232, 67, 147, 0.15) 0%, transparent 60%);
+  filter: blur(80px);
+}
+
+@media (min-width: 480px) {
+  .imageFrame {
+    border-radius: 24px;
+    border-width: 4px;
+  }
+  
+  .imageBackdrop { 
+    width: 340px; 
+    height: 340px; 
+    filter: blur(80px);
+  }
+  
+  [data-theme="light"] .imageBackdrop {
+    filter: blur(90px);
+  }
+}
+
+@media (min-width: 900px) {
+  .imageFrame {
+    border-radius: 28px;
+    border-width: 4px;
+  }
+  
+  .imageBackdrop { 
+    width: 520px; 
+    height: 520px; 
+    filter: blur(110px);
+  }
+  
+  [data-theme="light"] .imageBackdrop {
+    filter: blur(120px);
+  }
+}
+
+/* Enhanced profile image with professional styling */
 .profileImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 15%;
-  transform: scale(1.3) scaleX(-1);
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(1.05) contrast(1.05);
+  object-position: center center;
+  transform: scaleX(-1);
+  /* Color grading to match dark theme - darken desk, enhance colors */
+  filter: 
+    hue-rotate(-3deg)
+    saturate(1.25)
+    brightness(0.88)
+    contrast(1.18);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+/* Light mode image adjustments */
+[data-theme="light"] .profileImg {
+  filter: 
+    hue-rotate(-2deg)
+    saturate(1.15)
+    brightness(0.95)
+    contrast(1.12);
 }
 
 .profileCard:hover .profileImg {
-  transform: scale(1.35) scaleX(-1);
+  transform: scaleX(-1) scale(1.03);
+  filter: 
+    hue-rotate(-3deg)
+    saturate(1.35)
+    brightness(0.92)
+    contrast(1.22);
+}
+
+[data-theme="light"] .profileCard:hover .profileImg {
+  filter: 
+    hue-rotate(-2deg)
+    saturate(1.25)
+    brightness(0.98)
+    contrast(1.15);
+}
+
+.profileCard:hover .imageFrame {
+  border-color: rgba(108, 99, 255, 0.5);
+  box-shadow: 
+    0 0 0 1px rgba(108, 99, 255, 0.2),
+    0 25px 80px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(108, 99, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .profileCard:hover .imageFrame {
+  border-color: rgba(91, 82, 224, 0.4);
+  box-shadow: 
+    0 0 0 1px rgba(91, 82, 224, 0.15),
+    0 25px 80px rgba(0, 0, 0, 0.12),
+    0 0 40px rgba(91, 82, 224, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .initials {
@@ -627,16 +854,16 @@
   color: transparent;
 }
 
-/* Status badge — always visible, anchored inside card */
+/* Status badge — anchored to bottom left */
 .statusBadge {
   position: absolute;
-  bottom: -8px;
-  right: 0px;
+  bottom: 0px;
+  left: -10px;
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 13px;
-  background: var(--bg-secondary);
+  background: var(--bg-glass-strong);
   border: 1px solid rgba(52, 211, 153, 0.3);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
@@ -645,12 +872,13 @@
   color: var(--accent-success);
   z-index: 5;
   box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
 }
 
 @media (min-width: 900px) {
   .statusBadge {
-    bottom: 50px;
-    right: 0px;
+    bottom: 20px;
+    left: -40px;
     animation: floatAnim 4s ease-in-out infinite 0.5s;
   }
 }
@@ -675,80 +903,95 @@
     display: flex;
     position: absolute;
     align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    backdrop-filter: blur(16px);
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(10, 10, 15, 0.85);
+    border: 1px solid rgba(108, 99, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(108, 99, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
     z-index: 5;
-    transition: var(--transition-smooth);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
   }
 
+  /* Light mode floating cards */
+  [data-theme="light"] .floatCard {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(91, 82, 224, 0.25);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(91, 82, 224, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
   .floatCard:hover {
-    border-color: var(--border-accent);
-    box-shadow: var(--shadow-hover);
-    transform: scale(1.05);
+    border-color: rgba(108, 99, 255, 0.5);
+    box-shadow: 
+      0 12px 48px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(108, 99, 255, 0.3),
+      0 0 30px rgba(108, 99, 255, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px) scale(1.05);
+  }
+
+  [data-theme="light"] .floatCard:hover {
+    border-color: rgba(91, 82, 224, 0.4);
+    box-shadow: 
+      0 12px 48px rgba(0, 0, 0, 0.12),
+      0 0 0 1px rgba(91, 82, 224, 0.2),
+      0 0 30px rgba(91, 82, 224, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
   }
 
   .floatCardTop {
-    top: 10px;
-    left: -20px;
+    top: 80px;
+    right: -50px;
     animation: floatAnim 5s ease-in-out infinite;
   }
 
-  .floatCardRight {
-    right: -20px;
-    top: 50%;
-    animation: floatAnimRight 7s ease-in-out infinite 1s;
-  }
-
-  .floatCardRight:hover {
-    animation: none;
-    transform: translateY(-50%) scale(1.05) !important;
-  }
-
   .floatCardBottom {
-    bottom: 20px;
-    left: -10px;
+    bottom: 80px;
+    right: -50px;
     animation: floatAnim 6s ease-in-out infinite 2s;
   }
 }
 
 @keyframes floatAnim {
   0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
-}
-
-@keyframes floatAnimRight {
-  0%, 100% { transform: translateY(-50%); }
-  50%       { transform: translateY(calc(-50% - 8px)); }
+  50%       { transform: translateY(-12px); }
 }
 
 .floatIcon {
-  font-size: 1.1rem;
-  width: 34px;
-  height: 34px;
+  font-size: 1.3rem;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+}
+
+[data-theme="light"] .floatIcon {
+  box-shadow: 0 4px 12px rgba(91, 82, 224, 0.2);
 }
 
 .floatInfo {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
 
 .floatNum {
   font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 900;
   color: var(--text-primary);
   line-height: 1;
   letter-spacing: -0.02em;
@@ -756,8 +999,8 @@
 
 .floatLabel {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 500;
+  font-size: 0.65rem;
+  font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
