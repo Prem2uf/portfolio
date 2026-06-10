@@ -7,6 +7,7 @@ export const profileData = {
   hometown: "East Champaran, Bihar",
   linkedin: "https://www.linkedin.com/in/premchandra-yadav-20135b241/",
   github: "https://github.com/Prem2uf",
+  instagram: "https://www.instagram.com/premkumar.raj.33865854/",
   hackerrank: "#",
   leetcode: "#",
   gfg: "#",
