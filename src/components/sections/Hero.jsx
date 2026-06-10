@@ -224,14 +224,14 @@ const Hero = memo(function Hero() {
                 {!imageError ? (
                   <img
                     src={profileImage}
-                    alt="Premchandra Yadav - Full Stack Developer"
+                    alt="Premchandra Yadav - Full-Stack Developer, Software Engineer from Noida, India"
                     className={styles.profileImg}
                     itemProp="image"
                     loading="eager"
                     onError={() => setImageError(true)}
                   />
                 ) : (
-                  <span className={styles.initials}>PY</span>
+                  <span className={styles.initials}>Premchandra</span>
                 )}
               </div>
 

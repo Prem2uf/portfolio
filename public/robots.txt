@@ -6,6 +6,3 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://www.premchandrayadav.in/sitemap.xml
-
-# Disallow unnecessary paths
-Disallow: /assets/

@@ -45,7 +45,7 @@ const Navbar = memo(function Navbar({ activeSection, onNavClick }) {
             <div className={styles.logoBadge}>
               <img
                 src={profileImage}
-                alt="Premchandra Yadav"
+                alt="Premchandra Yadav - Software Developer"
                 className={styles.logoImg}
               />
             </div>

@@ -13,7 +13,7 @@ const Footer = memo(function Footer() {
             <div className={styles.logoBadge}>
               <img 
                 src={profileImage} 
-                alt="Premchandra Yadav" 
+                alt="Premchandra Yadav - Web Developer" 
                 className={styles.logoImg}
               />
             </div>
