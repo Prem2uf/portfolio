@@ -198,6 +198,69 @@ export const projects = [
         ]
       }
     ]
+  },
+  {
+    name: 'The Pehli Nazar',
+    tagline: 'Hindi News Portal — Bihar & India',
+    company: 'Independent Project',
+    role: 'Full-Stack Developer · Frontend & Backend',
+    link: 'thepehlinazar.com',
+    tech: ['React', 'Laravel', 'PHP', 'MySQL', 'REST APIs', 'Hostinger', 'SEO', 'Responsive Design'],
+    summary: 'Built a full-featured Hindi news portal from scratch — covering Bihar, national, politics, technology, sports, education, entertainment, religion, and jobs. Developed both the public-facing React frontend and the Laravel-powered backend with a custom admin panel for content management. The platform serves daily news with live breaking tickers, category-based browsing, trending sections, and author profiles.',
+    stat1Label: 'Type',
+    stat1Value: 'News Portal',
+    stat2Label: 'Role',
+    stat2Value: 'Full-Stack',
+    stat3Label: 'Status',
+    stat3Value: 'Live',
+    categories: [
+      {
+        title: 'React Frontend',
+        icon: 'code',
+        color: '#6c63ff',
+        points: [
+          'Built responsive, mobile-first news portal UI with React',
+          'Implemented live breaking news ticker with auto-scroll animation',
+          'Created category-based news browsing (Bihar, National, Tech, Politics, etc.)',
+          'Developed trending news section and "Most Read" rankings',
+          'Built author profile cards and article detail pages'
+        ]
+      },
+      {
+        title: 'Laravel Backend & Admin Panel',
+        icon: 'server',
+        color: '#22d3ee',
+        points: [
+          'Developed complete Laravel backend with RESTful APIs',
+          'Built custom admin panel for article creation, editing, and publishing',
+          'Implemented author management and role-based access',
+          'Created category and tag management system',
+          'Built image upload and media management features'
+        ]
+      },
+      {
+        title: 'Content Management',
+        icon: 'clipboardList',
+        color: '#f472b6',
+        points: [
+          'Multi-author publishing workflow with individual author profiles',
+          'Category-wise content organization across 9+ news categories',
+          'Breaking news management with priority-based display',
+          'Article scheduling and draft management'
+        ]
+      },
+      {
+        title: 'User Engagement Features',
+        icon: 'layers',
+        color: '#fb923c',
+        points: [
+          'Social media integration (Facebook 25K+, YouTube 10K+, WhatsApp 5K+)',
+          'Trending and most-read article algorithms',
+          'Category-based navigation with emoji icons for visual appeal',
+          'Date-stamped articles with relative time display (e.g., "18 घंटे पहले")'
+        ]
+      }
+    ]
   }
 ];
 
@@ -251,7 +314,7 @@ export const achievements = [
 export const education = [
   {
     degree: 'B.Tech in Computer Science',
-    school: 'Maharishi Markandeshwar (Deemed To Be University)',
+    school: 'Maharishi Markandeshwar (Deemed To Be University), Haryana',
     years: '2019 - 2023',
     grade: '82%'
   },

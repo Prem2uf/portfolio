@@ -5,6 +5,19 @@
   gap: 48px;
 }
 
+/* Project Block — wrapper for each project */
+.projectBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.projectBlock + .projectBlock {
+  padding-top: 48px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+
 /* Header */
 .header {
   text-align: center;

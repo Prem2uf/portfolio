@@ -23,104 +23,109 @@ const Icon = ({ name, size = 20 }) => {
       return <svg {...props}><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>;
     case 'clipboardList':
       return <svg {...props}><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>;
+    case 'code':
+      return <svg {...props}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>;
+    case 'zap':
+      return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
     default:
       return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
   }
 };
 
 const Projects = memo(function Projects() {
-  const project = projects[0];
-
   return (
     <div className={styles.projects}>
       <div className={styles.header}>
-        <span className={styles.sectionTag}>Featured Project</span>
-        <h2 className={styles.title}>My Flagship Work</h2>
+        <span className={styles.sectionTag}>Featured Projects</span>
+        <h2 className={styles.title}>My Work</h2>
         <p className={styles.subtitle}>
-          A large-scale, AI-powered enterprise SaaS platform built from the ground up.
+          Real-world projects I've built — from enterprise SaaS platforms to live news portals.
         </p>
       </div>
 
-      {/* ── Hero Banner ── */}
-      <div className={styles.heroBanner}>
-        <div className={styles.bannerBg}></div>
-        <div className={styles.bannerContent}>
-          <div className={styles.bannerLeft}>
-            <div className={styles.foundingBadge}>
-              <span className={styles.foundingDot}></span>
-              Founding Backend Developer · First Engineer on the Project
-            </div>
-            <h3 className={styles.projectName}>{project.name}</h3>
-            <p className={styles.projectCompany}>{project.company}</p>
-            <p className={styles.projectTagline}>{project.tagline}</p>
-            <p className={styles.projectRole}>{project.role}</p>
-            <p className={styles.projectSummary}>{project.summary}</p>
+      {projects.map((project, projectIdx) => (
+        <div key={projectIdx} className={styles.projectBlock}>
+          {/* ── Hero Banner ── */}
+          <div className={styles.heroBanner}>
+            <div className={styles.bannerBg}></div>
+            <div className={styles.bannerContent}>
+              <div className={styles.bannerLeft}>
+                <div className={styles.foundingBadge}>
+                  <span className={styles.foundingDot}></span>
+                  {project.role}
+                </div>
+                <h3 className={styles.projectName}>{project.name}</h3>
+                <p className={styles.projectCompany}>{project.company}</p>
+                <p className={styles.projectTagline}>{project.tagline}</p>
+                <p className={styles.projectSummary}>{project.summary}</p>
 
-            <div className={styles.techRow}>
-              {project.tech.map(t => (
-                <span key={t} className={styles.techBadge}>{t}</span>
-              ))}
-            </div>
+                <div className={styles.techRow}>
+                  {project.tech.map(t => (
+                    <span key={t} className={styles.techBadge}>{t}</span>
+                  ))}
+                </div>
 
-            {project.link && (
-              <a
-                href={`https://${project.link}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.visitLink}
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                  <polyline points="15 3 21 3 21 9"/>
-                  <line x1="10" y1="14" x2="21" y2="3"/>
-                </svg>
-                {project.link}
-              </a>
-            )}
+                {project.link && (
+                  <a
+                    href={`https://${project.link}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.visitLink}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                      <polyline points="15 3 21 3 21 9"/>
+                      <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                    {project.link}
+                  </a>
+                )}
+              </div>
+
+              <div className={styles.bannerRight}>
+                <div className={styles.statCard}>
+                  <span className={styles.statVal}>{project.stat1Value}</span>
+                  <span className={styles.statLbl}>{project.stat1Label}</span>
+                </div>
+                <div className={styles.statCard}>
+                  <span className={styles.statVal}>{project.stat2Value}</span>
+                  <span className={styles.statLbl}>{project.stat2Label}</span>
+                </div>
+                <div className={styles.statCard}>
+                  <span className={styles.statVal}>{project.stat3Value}</span>
+                  <span className={styles.statLbl}>{project.stat3Label}</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className={styles.bannerRight}>
-            <div className={styles.statCard}>
-              <span className={styles.statVal}>{project.stat1Value}</span>
-              <span className={styles.statLbl}>{project.stat1Label}</span>
-            </div>
-            <div className={styles.statCard}>
-              <span className={styles.statVal}>{project.stat2Value}</span>
-              <span className={styles.statLbl}>{project.stat2Label}</span>
-            </div>
-            <div className={styles.statCard}>
-              <span className={styles.statVal}>{project.stat3Value}</span>
-              <span className={styles.statLbl}>{project.stat3Label}</span>
-            </div>
+          {/* ── Category Grid ── */}
+          <div className={styles.categoryGrid}>
+            {project.categories.map((cat, idx) => (
+              <div
+                key={idx}
+                className={styles.catCard}
+                style={{ '--cat-color': cat.color }}
+              >
+                <div className={styles.catHeader}>
+                  <div className={styles.catIcon}>
+                    <Icon name={cat.icon} size={18} />
+                  </div>
+                  <h4 className={styles.catTitle}>{cat.title}</h4>
+                </div>
+                <ul className={styles.catPoints}>
+                  {cat.points.map((p, i) => (
+                    <li key={i} className={styles.catPoint}>
+                      <span className={styles.catBullet}></span>
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-
-      {/* ── Category Grid ── */}
-      <div className={styles.categoryGrid}>
-        {project.categories.map((cat, idx) => (
-          <div
-            key={idx}
-            className={styles.catCard}
-            style={{ '--cat-color': cat.color }}
-          >
-            <div className={styles.catHeader}>
-              <div className={styles.catIcon}>
-                <Icon name={cat.icon} size={18} />
-              </div>
-              <h4 className={styles.catTitle}>{cat.title}</h4>
-            </div>
-            <ul className={styles.catPoints}>
-              {cat.points.map((p, i) => (
-                <li key={i} className={styles.catPoint}>
-                  <span className={styles.catBullet}></span>
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+      ))}
     </div>
   );
 });
